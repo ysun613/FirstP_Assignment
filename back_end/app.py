@@ -64,4 +64,4 @@ if __name__ == '__main__':
     app.config['DATABASE'] = DATABASE
     with app.app_context():
         init_db()
-    app.run(debug=True)
+    app.run(debug=True,host = '0.0.0.0')
