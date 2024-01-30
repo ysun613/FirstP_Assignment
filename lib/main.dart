@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(const MyApp());
@@ -56,70 +59,175 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  String _weather = "Querying";
+  String _temp = "Querying";
+  String _city = 'Atlanta';
+  String _ip = "";
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+
+  // void _incrementCounter() {
+  //   setState(() {
+  //     _counter++;
+  //   });
+  // }
+
+  Future<Map<String, dynamic>> getWeatherData(String city) async {
+    final apiKey = '576ab16d26e14d18885144958243001';
+    final apiUrl = 'https://api.weatherapi.com/v1/current.json?q=$city&key=$apiKey';
+    try {
+      final response = await http.get(Uri.parse(apiUrl));
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        return data;
+      } else {
+        print('Failed to load weather data: ${response.statusCode}');
+        return {};
+      }
+    } catch (e) {
+      print('Error loading weather data: $e');
+      return {};
+    }
+  }
+
+
+  Future<Map<String, dynamic>> getIp() async {
+    final apiUrl = 'http://124.221.179.133:5000/get_ip';
+    try {
+      final response = await http.get(Uri.parse(apiUrl));
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        return data;
+      } else {
+        print('Failed to load weather data: ${response.statusCode}');
+        return {};
+      }
+    } catch (e) {
+      print('Error loading weather data: $e');
+      return {};
+    }
   }
 
   @override
+  void initState() {
+    super.initState();
+    //_loadWeatherData();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      _loadWeatherData();
+    });
+  }
+
+  Future<void> _loadWeatherData() async {
+    try {
+      final Map<String, dynamic> weatherData = await getWeatherData(
+          _city);
+      setState(() {
+        if (weatherData.isNotEmpty) {
+          print(weatherData);
+          final location = weatherData['location']['name'];
+          _temp = weatherData['current']['temp_c'].toString() + "°C";
+          _weather = weatherData['current']['condition']['text'];
+
+          print('Current weather in $location: $_weather');
+          print('Temperature in $location: $_temp°C');
+        } else {
+          print('Unable to fetch weather data for $_city.');
+        }
+        print('Weather data loaded: $weatherData');
+      });
+    }
+    catch (e) {
+      print('Error while loading weather data: $e');
+    }
+  }
+
+  void _incrementCounter() async {
+    try {
+      //String city ='Atlanta';
+      _city = 'Atlanta';
+      final Map<String, dynamic> ip_data = await getIp();
+      setState(() {
+
+        if (ip_data.isNotEmpty) {
+          print(ip_data);
+          _ip = ip_data['client_ip'];
+
+          print('IP: $_ip');
+        } else {
+          print('Unable to fetch weather data for $_city.');
+        }
+
+      });
+    } catch (e) {
+      print('Error while fetching weather data: $e');
+    }
+  }
+
+
+  @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
             Text(
-              '$_counter',
+              'Welcome to check in',
+              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                color: Colors.blue,
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+              ),
+            )
+            ,
+            Text(
+              '$_city, $_weather, $_temp',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            Text(
+              _ip.isNotEmpty ? 'Check in success!!!' : '',
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                color: Colors.green,
+              ),
+            ),
+            Text(
+              _ip.isNotEmpty ? 'Check in IP: $_ip' : '',
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                color: Colors.green,
+              ),
+            ),
+            Text(
+              'Current Time: ${DateFormat('HH:mm:ss').format(DateTime.now().toLocal())}',
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                color: Colors.green,
+              ),
+            )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ElevatedButton(
+          onPressed: _incrementCounter,
+          style: ElevatedButton.styleFrom(
+            primary: Theme.of(context).colorScheme.primary,
+            padding: EdgeInsets.all(16.0),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(width: 8),
+              Text('Check in',
+                style: TextStyle(color: Colors.white),
+        ),
+            ],
+          ),
+        ),
+      ),
     );
   }
+
 }
