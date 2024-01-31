@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter Check in APP',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Flutter Check in Home Page'),
     );
   }
 }
@@ -65,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String _temp = "Querying";
   String _city = 'Atlanta';
   String _ip = "";
-  String _username ="";
+  String _username = "";
 
   // void _incrementCounter() {
   //   setState(() {
@@ -75,7 +75,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<Map<String, dynamic>> getWeatherData(String city) async {
     final apiKey = '576ab16d26e14d18885144958243001';
-    final apiUrl = 'https://api.weatherapi.com/v1/current.json?q=$city&key=$apiKey';
+    final apiUrl =
+        'https://api.weatherapi.com/v1/current.json?q=$city&key=$apiKey';
     try {
       final response = await http.get(Uri.parse(apiUrl));
       if (response.statusCode == 200) {
@@ -90,6 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return {};
     }
   }
+
 
 
   Future<Map<String, dynamic>> getIp() async {
@@ -109,7 +111,8 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  Future<void> submitPunchData(String name, String weather, String temperature) async {
+  Future<void> submitPunchData(
+      String name, String weather, String temperature) async {
     final apiUrl = 'http://124.221.179.133:5000/save_punch';
 
     try {
@@ -127,7 +130,8 @@ class _MyHomePageState extends State<MyHomePage> {
         print('Punch data submitted successfully');
         // You can handle success response here
       } else {
-        print('Failed to submit punch data. Status code: ${response.statusCode}');
+        print(
+            'Failed to submit punch data. Status code: ${response.statusCode}');
         // You can handle error response here
       }
     } catch (e) {
@@ -147,13 +151,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> _loadWeatherData() async {
     try {
-      final Map<String, dynamic> weatherData = await getWeatherData(
-          _city);
+      final Map<String, dynamic> weatherData = await getWeatherData(_city);
       setState(() {
         if (weatherData.isNotEmpty) {
           print(weatherData);
           final location = weatherData['location']['name'];
-          _temp = weatherData['current']['temp_c'].toString() ;
+          _temp = weatherData['current']['temp_c'].toString();
           _weather = weatherData['current']['condition']['text'];
 
           print('Current weather in $location: $_weather');
@@ -163,8 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
         }
         print('Weather data loaded: $weatherData');
       });
-    }
-    catch (e) {
+    } catch (e) {
       print('Error while loading weather data: $e');
     }
   }
@@ -177,28 +179,22 @@ class _MyHomePageState extends State<MyHomePage> {
         _city = 'Atlanta';
         final Map<String, dynamic> ip_data = await getIp();
         setState(() {
-
           if (ip_data.isNotEmpty) {
             print(ip_data);
             _ip = ip_data['client_ip'];
             print('IP: $_ip');
-
-
           } else {
             print('Unable to fetch weather data for $_city.');
           }
         });
 
-        submitPunchData( _username, _weather,  _temp);
-
+        submitPunchData(_username, _weather, _temp);
       } catch (e) {
         print('Error while fetching weather data: $e');
       }
       // You can also include other logic here based on the form being valid
     }
-
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -207,8 +203,6 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-
-
       body: Form(
         key: _formKey,
         child: Column(
@@ -235,16 +229,15 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             SizedBox(height: 20),
-
             Text(
               'Welcome to check in',
               style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                color: Colors.blue,
-                fontSize: 40,
-                fontWeight: FontWeight.bold,
-              ),
+                    color: Colors.blue,
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
-          SizedBox(height: 20),
+            SizedBox(height: 20),
             Text(
               '$_city, $_weather, $_temp°C',
               style: Theme.of(context).textTheme.headlineMedium,
@@ -253,25 +246,26 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               _ip.isNotEmpty ? 'Hi $_username, you check in success!!!' : '',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: Colors.green,
-              ),
+                    color: Colors.green,
+                  ),
             ),
             Text(
               _ip.isNotEmpty ? 'Check in IP: $_ip' : '',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: Colors.green,
-              ),
+                    color: Colors.green,
+                  ),
             ),
             Text(
-              _ip.isNotEmpty ?'Current Time: ${DateFormat('HH:mm:ss').format(DateTime.now().toLocal())}':'',
+              _ip.isNotEmpty
+                  ? 'Current Time: ${DateFormat('HH:mm:ss').format(DateTime.now().toLocal())}'
+                  : '',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: Colors.green,
-              ),
+                    color: Colors.green,
+                  ),
             )
           ],
         ),
       ),
-
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ElevatedButton(
@@ -284,14 +278,14 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               SizedBox(width: 8),
-              Text('Check in',
+              Text(
+                'Check in',
                 style: TextStyle(color: Colors.white),
-        ),
+              ),
             ],
           ),
         ),
       ),
     );
   }
-
 }
