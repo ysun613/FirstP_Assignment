@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+//import 'package:permission_handler/permission_handler.dart';
+import 'package:geolocator/geolocator.dart';
 
 void main() {
   runApp(const MyApp());
@@ -59,6 +61,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  Position? _currentPosition;
 
   int _counter = 0;
   String _weather = "Querying";
@@ -75,8 +78,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<Map<String, dynamic>> getWeatherData(String city) async {
     final apiKey = '576ab16d26e14d18885144958243001';
+    // final apiUrl =
+    //     'https://api.weatherapi.com/v1/current.json?q=$city&key=$apiKey';
+
     final apiUrl =
-        'https://api.weatherapi.com/v1/current.json?q=$city&key=$apiKey';
+        'https://api.weatherapi.com/v1/current.json?q=${_currentPosition?.latitude},${_currentPosition?.longitude}&key=$apiKey';
+
     try {
       final response = await http.get(Uri.parse(apiUrl));
       if (response.statusCode == 200) {
@@ -92,7 +99,38 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  Future<void> _requestLocationPermission() async {
+    LocationPermission permission = await Geolocator.checkPermission();
 
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        print('denied');
+      }
+    } else if (permission == LocationPermission.deniedForever) {
+      print('deniedForever');
+    } else {
+      print('permission');
+    }
+  }
+
+
+  Future<void> _getCurrentLocation() async {
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+      setState(() {
+        _currentPosition = position;
+        print("my_lat:");
+        print(position.latitude);
+        print(position.longitude);
+
+      });
+    } catch (e) {
+      print('Error while getting location: $e');
+    }
+  }
 
   Future<Map<String, dynamic>> getIp() async {
     final apiUrl = 'http://124.221.179.133:5000/get_ip';
@@ -145,6 +183,8 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     //_loadWeatherData();
     WidgetsBinding.instance!.addPostFrameCallback((_) {
+      _requestLocationPermission();
+      _getCurrentLocation();
       _loadWeatherData();
     });
   }
@@ -155,12 +195,11 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         if (weatherData.isNotEmpty) {
           print(weatherData);
-          final location = weatherData['location']['name'];
+          _city = weatherData['location']['name'];
           _temp = weatherData['current']['temp_c'].toString();
           _weather = weatherData['current']['condition']['text'];
 
-          print('Current weather in $location: $_weather');
-          print('Temperature in $location: $_temp°C');
+          print('city $_city, weather : $_weather ');
         } else {
           print('Unable to fetch weather data for $_city.');
         }

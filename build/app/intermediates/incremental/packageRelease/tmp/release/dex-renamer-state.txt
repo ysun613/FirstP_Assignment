@@ -1,0 +1,4 @@
+#Wed Jan 31 10:54:56 CST 2024
+base.0=E\:\\flutter_code\\hello_flutter2\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

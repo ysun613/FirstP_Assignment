@@ -13,61 +13,133 @@
 13         to allow setting breakpoints, to provide hot reload, etc.
 14    -->
 15    <uses-permission android:name="android.permission.INTERNET" />
-15-->E:\flutter_code\hello_flutter2\android\app\src\debug\AndroidManifest.xml:6:5-66
-15-->E:\flutter_code\hello_flutter2\android\app\src\debug\AndroidManifest.xml:6:22-64
-16
-17    <application
-18        android:name="android.app.Application"
-19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-19-->[androidx.core:core:1.6.0] C:\Users\Administrator\.gradle\caches\transforms-3\d08c73bfb05384f2e52578171dbd141e\transformed\core-1.6.0\AndroidManifest.xml:24:18-86
-20        android:debuggable="true"
-21        android:icon="@mipmap/ic_launcher"
-22        android:label="hello_flutter2" >
-23        <activity
-24            android:name="com.example.hello_flutter2.MainActivity"
-25            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-26            android:exported="true"
-27            android:hardwareAccelerated="true"
-28            android:launchMode="singleTop"
-29            android:theme="@style/LaunchTheme"
-30            android:windowSoftInputMode="adjustResize" >
-31
-32            <!--
-33                 Specifies an Android theme to apply to this Activity as soon as
-34                 the Android process has started. This theme is visible to the user
-35                 while the Flutter UI initializes. After that, this theme continues
-36                 to determine the Window background behind the Flutter UI.
-37            -->
-38            <meta-data
-39                android:name="io.flutter.embedding.android.NormalTheme"
-40                android:resource="@style/NormalTheme" />
-41
-42            <intent-filter>
-43                <action android:name="android.intent.action.MAIN" />
-44
-45                <category android:name="android.intent.category.LAUNCHER" />
-46            </intent-filter>
-47        </activity>
-48        <!--
-49             Don't delete the meta-data below.
-50             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
-51        -->
-52        <meta-data
-53            android:name="flutterEmbedding"
-54            android:value="2" />
-55
-56        <uses-library
-56-->[androidx.window:window:1.0.0-beta04] C:\Users\Administrator\.gradle\caches\transforms-3\076eb9235982ee06112d76594ea8585f\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
-57            android:name="androidx.window.extensions"
-57-->[androidx.window:window:1.0.0-beta04] C:\Users\Administrator\.gradle\caches\transforms-3\076eb9235982ee06112d76594ea8585f\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
-58            android:required="false" />
-58-->[androidx.window:window:1.0.0-beta04] C:\Users\Administrator\.gradle\caches\transforms-3\076eb9235982ee06112d76594ea8585f\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
-59        <uses-library
-59-->[androidx.window:window:1.0.0-beta04] C:\Users\Administrator\.gradle\caches\transforms-3\076eb9235982ee06112d76594ea8585f\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
-60            android:name="androidx.window.sidecar"
-60-->[androidx.window:window:1.0.0-beta04] C:\Users\Administrator\.gradle\caches\transforms-3\076eb9235982ee06112d76594ea8585f\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
-61            android:required="false" />
-61-->[androidx.window:window:1.0.0-beta04] C:\Users\Administrator\.gradle\caches\transforms-3\076eb9235982ee06112d76594ea8585f\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
-62    </application>
+15-->E:\flutter_code\hello_flutter2\android\app\src\main\AndroidManifest.xml:15:5-67
+15-->E:\flutter_code\hello_flutter2\android\app\src\main\AndroidManifest.xml:15:22-64
+16    <!-- &lt;!&ndash; 网络权限 &ndash;&gt; -->
+17    <!-- <uses-permission android:name="android.permission.INTERNET" /> -->
+18    <!-- &lt;!&ndash; 写权限 &ndash;&gt; -->
+19    <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
+20    <!-- &lt;!&ndash; 读权限 &ndash;&gt; -->
+21    <!-- <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> -->
+22    <!-- 定位权限 -->
+23    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+23-->E:\flutter_code\hello_flutter2\android\app\src\main\AndroidManifest.xml:10:5-79
+23-->E:\flutter_code\hello_flutter2\android\app\src\main\AndroidManifest.xml:10:22-76
+24    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+24-->E:\flutter_code\hello_flutter2\android\app\src\main\AndroidManifest.xml:11:5-81
+24-->E:\flutter_code\hello_flutter2\android\app\src\main\AndroidManifest.xml:11:22-78
+25    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+25-->E:\flutter_code\hello_flutter2\android\app\src\main\AndroidManifest.xml:12:5-76
+25-->E:\flutter_code\hello_flutter2\android\app\src\main\AndroidManifest.xml:12:22-73
+26    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+26-->E:\flutter_code\hello_flutter2\android\app\src\main\AndroidManifest.xml:13:5-76
+26-->E:\flutter_code\hello_flutter2\android\app\src\main\AndroidManifest.xml:13:22-73
+27    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+27-->E:\flutter_code\hello_flutter2\android\app\src\main\AndroidManifest.xml:16:5-75
+27-->E:\flutter_code\hello_flutter2\android\app\src\main\AndroidManifest.xml:16:22-72
+28    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+28-->E:\flutter_code\hello_flutter2\android\app\src\main\AndroidManifest.xml:17:5-79
+28-->E:\flutter_code\hello_flutter2\android\app\src\main\AndroidManifest.xml:17:22-76
+29    <uses-permission android:name="android.permission.VIBRATE" /> <!-- 安装apk权限 -->
+29-->E:\flutter_code\hello_flutter2\android\app\src\main\AndroidManifest.xml:18:5-66
+29-->E:\flutter_code\hello_flutter2\android\app\src\main\AndroidManifest.xml:18:22-63
+30    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" /> <!-- 相机权限 -->
+30-->E:\flutter_code\hello_flutter2\android\app\src\main\AndroidManifest.xml:20:5-83
+30-->E:\flutter_code\hello_flutter2\android\app\src\main\AndroidManifest.xml:20:22-80
+31    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+31-->E:\flutter_code\hello_flutter2\android\app\src\main\AndroidManifest.xml:22:5-85
+31-->E:\flutter_code\hello_flutter2\android\app\src\main\AndroidManifest.xml:22:22-82
+32
+33    <permission
+33-->[androidx.core:core:1.9.0] C:\Users\Administrator\.gradle\caches\transforms-3\d9a7bda5b0a0d2fc08828ff145bfcb70\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
+34        android:name="com.example.hello_flutter2.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+34-->[androidx.core:core:1.9.0] C:\Users\Administrator\.gradle\caches\transforms-3\d9a7bda5b0a0d2fc08828ff145bfcb70\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
+35        android:protectionLevel="signature" />
+35-->[androidx.core:core:1.9.0] C:\Users\Administrator\.gradle\caches\transforms-3\d9a7bda5b0a0d2fc08828ff145bfcb70\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
+36
+37    <uses-permission android:name="com.example.hello_flutter2.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+37-->[androidx.core:core:1.9.0] C:\Users\Administrator\.gradle\caches\transforms-3\d9a7bda5b0a0d2fc08828ff145bfcb70\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
+37-->[androidx.core:core:1.9.0] C:\Users\Administrator\.gradle\caches\transforms-3\d9a7bda5b0a0d2fc08828ff145bfcb70\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
+38
+39    <application
+40        android:name="android.app.Application"
+41        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+41-->[androidx.core:core:1.9.0] C:\Users\Administrator\.gradle\caches\transforms-3\d9a7bda5b0a0d2fc08828ff145bfcb70\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
+42        android:debuggable="true"
+43        android:icon="@mipmap/ic_launcher"
+44        android:label="hello_flutter2" >
+45        <activity
+46            android:name="com.example.hello_flutter2.MainActivity"
+47            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+48            android:exported="true"
+49            android:hardwareAccelerated="true"
+50            android:launchMode="singleTop"
+51            android:theme="@style/LaunchTheme"
+52            android:windowSoftInputMode="adjustResize" >
+53
+54            <!--
+55                 Specifies an Android theme to apply to this Activity as soon as
+56                 the Android process has started. This theme is visible to the user
+57                 while the Flutter UI initializes. After that, this theme continues
+58                 to determine the Window background behind the Flutter UI.
+59            -->
+60            <meta-data
+61                android:name="io.flutter.embedding.android.NormalTheme"
+62                android:resource="@style/NormalTheme" />
 63
-64</manifest>
+64            <intent-filter>
+65                <action android:name="android.intent.action.MAIN" />
+66
+67                <category android:name="android.intent.category.LAUNCHER" />
+68            </intent-filter>
+69        </activity>
+70        <!--
+71             Don't delete the meta-data below.
+72             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+73        -->
+74        <meta-data
+75            android:name="flutterEmbedding"
+76            android:value="2" />
+77
+78        <service
+78-->[:geolocator_android] E:\flutter_code\hello_flutter2\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-14:56
+79            android:name="com.baseflow.geolocator.GeolocatorLocationService"
+79-->[:geolocator_android] E:\flutter_code\hello_flutter2\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-77
+80            android:enabled="true"
+80-->[:geolocator_android] E:\flutter_code\hello_flutter2\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-35
+81            android:exported="false"
+81-->[:geolocator_android] E:\flutter_code\hello_flutter2\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-37
+82            android:foregroundServiceType="location" />
+82-->[:geolocator_android] E:\flutter_code\hello_flutter2\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-53
+83
+84        <uses-library
+84-->[androidx.window:window:1.0.0-beta04] C:\Users\Administrator\.gradle\caches\transforms-3\076eb9235982ee06112d76594ea8585f\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+85            android:name="androidx.window.extensions"
+85-->[androidx.window:window:1.0.0-beta04] C:\Users\Administrator\.gradle\caches\transforms-3\076eb9235982ee06112d76594ea8585f\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+86            android:required="false" />
+86-->[androidx.window:window:1.0.0-beta04] C:\Users\Administrator\.gradle\caches\transforms-3\076eb9235982ee06112d76594ea8585f\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+87        <uses-library
+87-->[androidx.window:window:1.0.0-beta04] C:\Users\Administrator\.gradle\caches\transforms-3\076eb9235982ee06112d76594ea8585f\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+88            android:name="androidx.window.sidecar"
+88-->[androidx.window:window:1.0.0-beta04] C:\Users\Administrator\.gradle\caches\transforms-3\076eb9235982ee06112d76594ea8585f\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+89            android:required="false" />
+89-->[androidx.window:window:1.0.0-beta04] C:\Users\Administrator\.gradle\caches\transforms-3\076eb9235982ee06112d76594ea8585f\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+90
+91        <activity
+91-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Administrator\.gradle\caches\transforms-3\e0a8793a7a85d6e071b7a743c9adf075\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:20:9-22:45
+92            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+92-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Administrator\.gradle\caches\transforms-3\e0a8793a7a85d6e071b7a743c9adf075\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:20:19-85
+93            android:exported="false"
+93-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Administrator\.gradle\caches\transforms-3\e0a8793a7a85d6e071b7a743c9adf075\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:22:19-43
+94            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+94-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Administrator\.gradle\caches\transforms-3\e0a8793a7a85d6e071b7a743c9adf075\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:21:19-78
+95
+96        <meta-data
+96-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Administrator\.gradle\caches\transforms-3\55b4e390742817dc4b9653e42d791034\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
+97            android:name="com.google.android.gms.version"
+97-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Administrator\.gradle\caches\transforms-3\55b4e390742817dc4b9653e42d791034\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
+98            android:value="@integer/google_play_services_version" />
+98-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Administrator\.gradle\caches\transforms-3\55b4e390742817dc4b9653e42d791034\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
+99    </application>
+100
+101</manifest>

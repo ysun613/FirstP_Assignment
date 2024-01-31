@@ -24,3 +24,6 @@ return data:
     "message": "Punch data saved successfully"
 }
 
+
+# 打包
+flutter build apk
