@@ -3,6 +3,14 @@
 ## Overview
 This project is an application that allows users to check in with weather data integration. It's composed of a Flutter frontend (`main.dart`), a Dart script for fetching weather data (`demo.dart`), and a Python Flask backend (`app.py`). The application provides functionalities like retrieving current weather information and managing user check-ins with associated weather data.
 
+
+https://github.com/ysun613/FirstP_Assignment/assets/112642554/f373c024-ba76-489c-88a8-35ba41e2c12a
+
+
+https://github.com/ysun613/FirstP_Assignment/assets/112642554/1694c0c7-6b23-4598-a444-b428c9b59892
+
+
+
 ## Structure
 - `main.dart`: The main Flutter application file, setting up the user interface and application logic.
 - `demo.dart`: A Dart script responsible for fetching and displaying weather data from an external API.
