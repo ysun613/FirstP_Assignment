@@ -49,5 +49,12 @@ https://github.com/ysun613/FirstP_Assignment/assets/112642554/1694c0c7-6b23-4598
 - `/get_ip`: GET request to retrieve the client's IP address.
 - `/save_punch`: POST request to save user check-in data.
 
+## Debug Log
+   - Issue Resolution: Transmitting JSON Files
+   - I developed the backend and established a RESTful API for data exchange with my partner.
+   - I helped her Identified the need to transmit JSON files, not form data, for compatibility.
+   - She made the correction, ensuring the program worked as expected.
+
+
 
 
